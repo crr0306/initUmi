@@ -1,0 +1,22 @@
+.globalFooter {
+  padding: 0 16px;
+  margin: 20px 0 10px 0;
+  text-align: center;
+
+
+
+}
+.links {
+  margin-bottom: 8px;
+
+ 
+}
+a {
+  color:black;
+  transition:all 0.3s;
+  
+}
+.copyright {
+  color: black;
+  font-size: 14px;
+}
