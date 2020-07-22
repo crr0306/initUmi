@@ -1,23 +1,15 @@
-
-.normal {
-  font-family: Georgia, sans-serif;
-  margin-top: 4em;
-  text-align: center;
-}
-
-.welcome {
-  height: 512px;
+.login_content{
+  width: 300px;
   
-  background-size: 512px 512px;
 }
-
-.list {
-  font-size: 1.2em;
-  margin: 1.8em 0 0;
-  list-style: none;
-  line-height: 1.5em;
+.login_logo{
+  min-height: 50px;
+  
 }
-
-.list code {
-  background: #f7f7f7;
+.login_logo img{
+  min-height: 50px;
+  width: 100%;
+}
+ .login_title{
+  text-align: center;
 }

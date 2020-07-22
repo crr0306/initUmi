@@ -4,17 +4,21 @@
   text-align: center;
 
 
-
 }
 .links {
   margin-bottom: 8px;
 
  
 }
-a {
+.links a {
   color:black;
   transition:all 0.3s;
+  margin-right: 40px;
   
+  
+}
+.links a :hover{
+  color: red;
 }
 .copyright {
   color: black;

@@ -9,9 +9,11 @@ class loginLayout extends Component{
   render(){
     const {children} =this.props;
     return(
-        <Layout className='login-container'>
+        <Layout className={styles.login_container}>
           <p>登录页面布局</p>
-          <Content className='login-content'>{children}</Content>
+          <Content className={styles.login_content}>
+            {children}
+          </Content>
           <Footer>
             <MyFooter/>
           </Footer>
