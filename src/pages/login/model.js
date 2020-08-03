@@ -1,4 +1,4 @@
-import * as api from './service';
+import * as api from '../../services/login';
 import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 

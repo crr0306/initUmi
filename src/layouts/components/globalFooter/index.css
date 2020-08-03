@@ -1,8 +1,8 @@
 .globalFooter {
-  padding: 0 16px;
-  margin: 20px 0 10px 0;
+  margin: 2px 0 2px 0;
+  padding: 0 16px 1px;
   text-align: center;
-
+  width: 20%;
 
 }
 .links {

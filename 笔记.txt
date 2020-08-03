@@ -1,0 +1,7 @@
+1、子组件布局 不写在父组件中，那是无效的
+2、页面没有边框滚动
+  overflow:hidden;
+3、子组件在父组件中居中：
+   display: flex;
+   text-align: center;
+   justify-content: center;

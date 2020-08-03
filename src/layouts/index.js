@@ -1,10 +1,24 @@
-import styles from './index.css';
+
 import LoginLayout from './login'
+import PlatformLayout from './platform';
 function globalLayout(props) {
-  const { children } = props;
-  return (
-    <LoginLayout>{children}</LoginLayout>
-  );
+  const { location,children } = props;
+  const {pathname} =location;
+  if( pathname === '/' ||
+  pathname === '/login' ||
+  pathname === '/register' ||
+  /^\/initialize/.test(pathname) ||
+  /^\/exception/.test(pathname)
+  ){
+    return (
+      <LoginLayout>{children}</LoginLayout>
+    );
+  }
+  console.log("PlatformLayout");
+  console.log("props",props);
+  return (<PlatformLayout {...props}>{children}</PlatformLayout>);
+
+  
 }
 
 export default globalLayout;

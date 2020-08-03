@@ -4,9 +4,9 @@
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
 import { extend } from 'umi-request';
-import { notification } from 'antd';
-
-
+import { message, notification } from 'antd';
+import router from 'umi/router';
+import Cookies from 'js-cookie'
 const codeMessage = {
     200: '服务器成功返回请求的数据。',
     201: '新建或修改数据成功。',
@@ -52,38 +52,87 @@ const request = extend({
 
 // request拦截器, 改变url 或 options.
 request.interceptors.request.use(async (url, options) => {
-
-    let c_token = localStorage.getItem("x-auth-token");
-    if (c_token) {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'x-auth-token': c_token
-        };
-        return (
-            {
-                url: url,
-                options: { ...options, headers: headers },
-            }
-        );
-    } else {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'x-auth-token': c_token
-        };
-        return (
-            {
-                url: url,
-                options: { ...options },
-            }
-        );
+    console.log("request.interceptors");
+    checkIsLogin(url);
+    // let c_token = localStorage.getItem("x-auth-token");
+    // console.log("c_token",c_token);
+    // if (c_token) {
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json',
+    //         'x-auth-token': c_token
+    //     };
+    //     return (
+    //         {
+    //             url: url,
+    //             options: { ...options, headers: headers },
+    //         }
+    //     );
+    // } else {
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json',
+    //         'x-auth-token': c_token
+    //     };
+    //     return (
+    //         {
+    //             url: url,
+    //             options: { ...options },
+    //         }
+    //     );
+    // }   
+    const { method, headers, body } = options;
+    if (method === 'POST' || method === 'PUT' || method === 'DELETE') {
+        //表单请求
+        if (!(body instanceof FormData)) {
+            options.headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+                ...headers,
+            };
+            options.body = JSON.stringify(options.body);
+        } else {
+            //非表单请求
+            // newOptions.body is FormData
+            options.headers = {
+                Accept: 'application/json',
+                ...headers,
+            };
+        }
     }
 
 })
-
+const checkIsLogin = (url) => {
+    console.log("checkIsLogin");
+    const isLogin = sessionStorage.getItem('isLogin');
+    const href = window.location.href;
+    if (isLogin !== 'true' && url.indexOf('/login') === -1 && href.indexOf('/login') === -1) {
+        message.warning('请在登录后操作!');
+        router.push('/login');
+        return;
+    }
+};
+const checkStatus = response => {
+    console.log("checkStatus");
+    const { status } = response;
+    if (status >= 200 && status < 300) {
+        return response;
+    }
+    const errortext = codeMessage[response.status] || response.statusText;
+    notification.error({
+        message: `请求错误 ${response.status}: ${response.url}`,
+        description: errortext,
+    });
+    const error = new Error(errortext);
+    error.name = response.status;
+    error.response = response;
+    throw error;
+};
 // response拦截器, 处理response
 request.interceptors.response.use((response, options) => {
+    
+    console.log("response.interceptors");
+    checkStatus(response);
     let token = response.headers.get("x-auth-token");
     if (token) {
         localStorage.setItem("x-auth-token", token);

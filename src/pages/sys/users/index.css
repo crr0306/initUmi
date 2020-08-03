@@ -1,0 +1,15 @@
+.login_content{
+  width: 300px;
+  
+}
+.login_logo{
+  min-height: 50px;
+  
+}
+.login_logo img{
+  min-height: 50px;
+  width: 100%;
+}
+ .login_title{
+  text-align: center;
+}

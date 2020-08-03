@@ -1,41 +1,18 @@
 
 .login_container {
- 
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;
-  max-height: 100%;
-  max-width: 100%;
-  overflow:hidden;
 }
 
-.login_top_content {
+.login_content {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-.login_left_content {
-  width: 50%;
-  margin:0 auto; 
-   
-  
-}
-.login_right_content {
-
-  width: 50%;
-  
-  
-}
-.login_logo{
-  
-}
-img{
-  width: 690px;
-  height: 470px;
-}
-
-
 
 

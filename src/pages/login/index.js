@@ -1,9 +1,10 @@
 import styles from './index.css';
 import { PureComponent } from 'react';
-import logo from '../../assets/logo.png';
-import Login from './components/Login';
-import { message, Row, Col } from 'antd';
+
+import Left from './components/left';
+import { message } from 'antd';
 import { connect } from 'dva';
+
 /**
  * connect和dispatch要配合使用，否则无法获取props
  */
@@ -19,30 +20,28 @@ class Index extends PureComponent {
       message.warning("用户未登录");
     }
   }
-  handleSubmit=(err,values)=>{
-    console.log("values:",values);
-    for(const name in values){
-      if(values[name]===undefined){
-        message.error("用户或者密码错误");
+  handleSubmit = (err, values) => {
+    console.log("values:", values);
+    for (const name in values) {
+      if (values[name] === undefined) {
+        message.error("用户或者密码错误1");
       }
     }
     this.props.dispatch({
-      type:"login/login",
-      payload:{
+      type: "login/login",
+      payload: {
         ...values,
       },
     });
   };
   render() {
     return (
-      <div className={styles.login_content}>
-        <Row >
-          <Col span={24} className={styles.login_logo}>
-            <img alt='logo' src={logo}></img>
-          </Col>
-        </Row>
-        <h2 className={styles.login_title}>大头系统</h2>
-        <Login onSubmit={this.handleSubmit}></Login>
+      <div className={styles.login}>
+     
+          <h2 className={styles.login_title}>大头系统</h2>
+          <Left className={styles.login_content} onSubmit={this.handleSubmit}></Left>
+       
+
       </div>
     );
   }
