@@ -5,9 +5,9 @@
  * @version  1.0.0
  * @description  菜单栏model
  */
-import * as api from '../../../services/menu';
-import orginalData from '../../../../conf/menu.config';
-import { munesFilter, flattenMenu } from '../../../utils/_';
+import * as api from '../services/menu';
+import orginalData from '../../conf/menu.config';
+import { munesFilter, flattenMenu } from '../utils/_';
 export default {
     namespace: 'menu',
     state: {

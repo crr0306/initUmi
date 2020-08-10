@@ -4,6 +4,7 @@ import { PureComponent } from 'react';
 import Left from './components/left';
 import { message } from 'antd';
 import { connect } from 'dva';
+import { sysName } from '../../../conf/platform.config';
 
 /**
  * connect和dispatch要配合使用，否则无法获取props
@@ -38,7 +39,7 @@ class Index extends PureComponent {
     return (
       <div className={styles.login}>
      
-          <h2 className={styles.login_title}>大头系统</h2>
+          <h2 className={styles.login_title}>{sysName}</h2>
           <Left className={styles.login_content} onSubmit={this.handleSubmit}></Left>
        
 

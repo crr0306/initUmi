@@ -42,18 +42,20 @@ componentDidMount(){
     console.log("menusData3",menusData);
     const {children} =this.props;
     return(
-        <Layout className={styles.login_container}>
-          <p>登录后页面布局</p>
-          <Sider className='sider'>
+        <Layout className={styles.whole_container}>
+          {/* 左边 */}
+          <Sider className={styles.sider}>
             <Logo></Logo>
             <Menus   menusData={menusData}></Menus>
           </Sider>
-          <Layout>
-            <Header>
+          {/* 右边 */}
+          <Layout id="backTop" className={styles.right_content} >
+            {/* 右边：头 */}
+            <Header className={styles.contentHeader}>
               <MyHeader></MyHeader>
             </Header>
             
-            <Content>
+            <Content className={styles.mainContent}>
               <p>主要内容，显示内容是children，而children是来自layout/index.js中,它是根据不同路径转到不同的布局上</p>
               {children}
             </Content>

@@ -1,18 +1,31 @@
 
-.login_container {
+.whole_container {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
-  background-repeat: no-repeat;
-  background-position: center 110px;
-  background-size: 100%;
+  background-color: springgreen;
+
 }
 
-.login_content {
+.sider {
+  height: 100vh;
+  position: fixed;
+  left: 0;
+}
+.right_content {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  background-color: mediumblue;
+  margin-left: 205px;
+}
+/* .contentHeader{
+  background-color: red;
+ 
+  
+} */
+.mainContent{
+  display: flex;
+  flex-direction: column;
+  background-color: yellow;
+
 }
 
 

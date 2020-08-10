@@ -5,3 +5,12 @@
    display: flex;
    text-align: center;
    justify-content: center;
+4、connect和dispatch要配合使用，否则无法获取props
+5、Context.Consumer
+使用Context提供的provider和consumer组件来实现跨层级的组件数据传递。
+父组件：使用provider传递values
+子组件：使用consumer来接受参数值
+6、方法传递
+将父组件中的方法通过props传递到子组件中；
+执行的时候，先执行子组件中，通过子组件调用父组件方法；
+父组件中的方式，对外发出请求；

@@ -1,17 +1,20 @@
 import { Row, Col } from 'antd';
 import logo from "../../../assets/logo.png";
 import React, { PureComponent } from 'react';
+import styles from './index.css';
 class Logo extends PureComponent{
 
   render(){
-    const imgLogo = <img src={logo} alt="logo" style={{ height: '44px' }} />;
+    
   
     return(
-        <Row>
-          <Col span={7}>
-              {imgLogo}
-          </Col>
-        </Row>
+      <div className={styles.header}> 
+      
+              <p>元素1</p>
+              <p>元素2</p>
+     
+      </div>
+    
     );
   }
 }

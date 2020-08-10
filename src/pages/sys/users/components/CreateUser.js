@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Children } from 'react';
 import { Modal, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
@@ -20,16 +20,18 @@ class UserEditModal extends Component {
       visible: false,
     });
   }
-  okHandler = () => {
-    const { onOk } = this.props;
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        onOk(values);
+  onHandler=()=>{
+    const {onOk}=this.props;
+    this.props.form.validateFields((err,vaules)=>{
+      console.log("values:",vaules);
+      if(!err){
+        console.log("onOk in children");
+        onOk(vaules);
         this.hideModalHandler();
       }
     });
   }
-  render() {
+  render(){
     const { children, form, record } = this.props;
     const { getFieldDecorator } = form;
     const { name, email, website } = record;
@@ -37,19 +39,18 @@ class UserEditModal extends Component {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
     };
-
-    return (
+    return(
       <span>
         <span onClick={this.showModalHandler}>
           {children}
         </span>
         <Modal
-          title="Edit User"
+          title="create user"
           visible={this.state.visible}
-          onOk={this.okHandler}
+          onOk={this.onHandler}
           onCancel={this.hideModalHandler}
         >
-          <Form onSubmit={this.okHandler}>
+           <Form onSubmit={this.okHandler}>
             <FormItem
               {...formItemLayout}
               label="Name"
@@ -85,5 +86,9 @@ class UserEditModal extends Component {
       </span>
     );
   }
+
+
+
+
 }
 export default Form.create()(UserEditModal);

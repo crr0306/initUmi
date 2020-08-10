@@ -41,6 +41,7 @@ export default {
             yield put({ type: 'reload' });
         },
         *create({ payload: values }, { call, put }) {
+            
             yield call(api.create, values);
             yield put({ type: 'reload' });
         },

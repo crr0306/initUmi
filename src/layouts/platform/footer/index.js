@@ -1,6 +1,7 @@
 import { Row, Col } from 'antd';
 import logo from "../../../assets/logo.png";
 import React, { PureComponent } from 'react';
+ 
 class Logo extends PureComponent{
 
   render(){

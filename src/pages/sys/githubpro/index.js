@@ -21,11 +21,9 @@ class Index extends PureComponent {
  
   render() {
     return (
-      <div className={styles.login_content}>
-        <Row >
-          
-        </Row>
-        <h2 className={styles.login_title}>大头系统</h2>
+      <div className={styles.right_main_content}>
+      
+       <p>默认页面</p>
         
       </div>
     );

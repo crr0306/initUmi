@@ -4,7 +4,7 @@ import { Link } from 'umi';
 import { Table, Pagination, Popconfirm, Button } from 'antd';
 
 import styles from './index.css';
-import UserModal from './components/Modal';
+import CreateUser from './components/CreateUser';
 /**
  * connect和dispatch要配合使用，否则无法获取props
  */
@@ -24,8 +24,8 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       title: 'Website',
       dataIndex: 'website',
       key: 'website',
-    }, 
-  
+    },
+
     // {
     //   title: 'Operation',
     //   dataIndex: 'operation',
@@ -49,17 +49,30 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       payload: { page },
     });
   }
-  let paginatinProp={
-    
-  };
+  function createHandler(values) {
+    console.log("onOk in parent");
+    dispatch({
+      type: 'users/create',
+      payload: values,
+    });
+  }
   return (
-    <div>
-       <Table
+
+    <div className={styles.children}>
+      <div className={styles.create}>
+        <CreateUser
+          record={{}}
+          onOk={createHandler}
+        >
+          <Button type="primary">Create User</Button>
+        </CreateUser>
+      </div>
+      <Table
         columns={columns}
         loading={loading}
         dataSource={dataSource}
         rowKey={record => record.id}
-        pagination={{pageSize:3,showTotal:total=>`总共${total}条`}}
+        pagination={{ pageSize: 3, showTotal: total => `总共${total}条` }}
       />
       {/* <Pagination
         className="ant-table-pagination"
@@ -69,8 +82,10 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
         onChange={pageChangeHandler}
       /> */}
     </div>
-   
-   
+
+
+
+
   );
 }
 function mapStateToProps(state) {

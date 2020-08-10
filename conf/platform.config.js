@@ -16,7 +16,7 @@ module.exports = {
     // 登录页名称
     loginName: '数据平台',
     // 系统名称
-    sysName: 'TEST-Pro',
+    sysName: '国联证券',
     // 版权
     copyright: "2019 mpw0311@163.com.",
     // 是否开启菜单权限校验

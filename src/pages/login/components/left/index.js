@@ -124,8 +124,9 @@ class Login extends PureComponent {
               {
 
                 fd('smscode', {
-                  // initialValue: "admin",
+                  initialValue: "123456",
                   rules: [{
+
                     requires: true,
                     message: '请输入验证码'
                   }]
