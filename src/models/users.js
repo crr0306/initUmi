@@ -22,7 +22,7 @@ export default {
         *fetch({ payload: { page = 1 } }, { call, put }) {
             const result = yield call(api.fetch, { page });
             const { data: list, } = result;
-            console.log("list；",list);
+            console.log("save to state");
             yield put({
                 type: 'save',
                 payload: {

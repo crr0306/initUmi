@@ -6,7 +6,8 @@ import { Table, Pagination, Popconfirm, Button } from 'antd';
 import styles from './index.css';
 import CreateUser from './components/CreateUser';
 /**
- * connect和dispatch要配合使用，否则无法获取props
+ * 1、connect和dispatch要配合使用，否则无法获取props
+ * 2、初始化请求的数据：model中的subscriptions
  */
 
 function Users({ dispatch, list: dataSource, loading, total, page: current }) {
@@ -15,7 +16,7 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: text => <Link to={`/sys/users/${text}`}>{text}</Link>,
+      render: (text, record) => <Link to={`/sys/users/detail/${record.id}`}>{text}</Link>,
     }, {
       title: 'Email',
       dataIndex: 'email',
@@ -25,30 +26,44 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       dataIndex: 'website',
       key: 'website',
     },
-
-    // {
-    //   title: 'Operation',
-    //   dataIndex: 'operation',
-    //   key: 'operation',
-    //   render: (text, record) => (
-    //     <span className={styles.operation}>
-    //       <UserModal record={record} onOk={editHandler.bind(null, record.id)}>
-    //         <a href="/">Edit</a>
-    //       </UserModal>
-    //       <Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, record.id)}>
-    //         <a href="/">Delete</a>
-    //       </Popconfirm>
-    //     </span>
-    //   ),
-    // },
+    {
+      title: 'Operation',
+      dataIndex: 'operation',
+      key: 'operation',
+      render: (text, record) => (
+      
+        <span className={styles.operation}>
+          <CreateUser selfRecord={record} onOk={editHandler.bind(null, record.id)}>
+            <a href="/">Edit</a>
+          </CreateUser>
+          <Popconfirm title="Confirm to delete?" okText='拖出去斩了'
+						  cancelText='容朕再想想'  onConfirm={deleteHandler.bind(null, record.id)}>
+            <a href="/">Delete</a>
+          </Popconfirm>
+        </span>
+      ),
+    },
+  
   ];
-
-  function pageChangeHandler(page) {
+  function editHandler(id, values) {
     dispatch({
-      type: 'users/fetch',
-      payload: { page },
+      type: 'users/patch',
+      payload: { id, values },
     });
   }
+  function deleteHandler(id) {
+    // 调用models users 内remove方法
+    dispatch({
+      type: 'users/removeuser',
+      payload: id,
+    });
+  }
+  // function pageChangeHandler(page) {
+  //   dispatch({
+  //     type: 'users/fetch',
+  //     payload: { page },
+  //   });
+  // }
   function createHandler(values) {
     console.log("onOk in parent");
     dispatch({
@@ -61,7 +76,7 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
     <div className={styles.children}>
       <div className={styles.create}>
         <CreateUser
-          record={{}}
+          selfRecord={{}}
           onOk={createHandler}
         >
           <Button type="primary">Create User</Button>
@@ -90,6 +105,7 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
 }
 function mapStateToProps(state) {
   const { list, total, page } = state.users;
+  console.log("list:",list);
   return {
     list,
     total,

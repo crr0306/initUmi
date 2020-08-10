@@ -10,8 +10,8 @@ class Logo extends PureComponent{
     return(
       <div className={styles.header}> 
       
-              <p>元素1</p>
-              <p>元素2</p>
+              <p>右边标题信息1</p>
+              <p>右边标题信息2</p>
      
       </div>
     

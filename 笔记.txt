@@ -6,6 +6,19 @@
    text-align: center;
    justify-content: center;
 4、connect和dispatch要配合使用，否则无法获取props
+  function mapStateToProps(state) {
+    const { list, total, page } = state.users;
+    return {
+      list,
+      total,
+      page,
+      loading: state.loading.models.users,
+    };
+  }
+  export default connect(mapStateToProps)(Users);
+  其中：
+  Users是自定义功能名字
+  state.users:users是model中namespace
 5、Context.Consumer
 使用Context提供的provider和consumer组件来实现跨层级的组件数据传递。
 父组件：使用provider传递values
@@ -14,3 +27,12 @@
 将父组件中的方法通过props传递到子组件中；
 执行的时候，先执行子组件中，通过子组件调用父组件方法；
 父组件中的方式，对外发出请求；
+7、modal弹框、确定框Popconfirm
+8、model数据存储数据过程：
+（1）通过dispatch 请求到model中的effects
+（2）到mock中
+（3）通过reducers中的save将数据存储到state中
+（4）connect则将model中的state存储到当前组件props中
+9、 model 中的 subscriptions 相当于一个监听器，可以监听路由变化，鼠标，键盘变化，服务器连接变化，状态变化等，
+这样在其中就可以根据不同的变化做出相应的处理，在这个 subsriptions 中的方法名是随意定的，
+每次变化都会一次去调用里面的所有方法。

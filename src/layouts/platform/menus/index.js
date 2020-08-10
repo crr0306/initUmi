@@ -20,7 +20,7 @@ class LeftMenu extends PureComponent {
       if (row === undefined) {
         return false;
       }
-      console.log("row:",row);
+      console.log("row:", row);
       const { title: name, link = "", key = link, icon = "bars", children, target = '_blank', ...restState } = row;
       if (children && children.length > 0) {
         const subMenu = self.renderMenu(children, pathtitles.concat(name));
@@ -34,7 +34,7 @@ class LeftMenu extends PureComponent {
         if (link === '' && href) {
           return (
             <Item key={href.slice(-5)}
-                  text={name}
+              text={name}
             >
               <a href={href} target={target}>
                 <Icon type={icon}></Icon>

@@ -32,9 +32,10 @@ class UserEditModal extends Component {
     });
   }
   render(){
-    const { children, form, record } = this.props;
+    const { children, form, selfRecord } = this.props;
     const { getFieldDecorator } = form;
-    const { name, email, website } = record;
+    const { name, email, website } = selfRecord;
+    console.log("name",name);
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
@@ -49,6 +50,8 @@ class UserEditModal extends Component {
           visible={this.state.visible}
           onOk={this.onHandler}
           onCancel={this.hideModalHandler}
+          cancelText="自定义取消按钮文字"
+          okText="自定义确定按钮文字"
         >
            <Form onSubmit={this.okHandler}>
             <FormItem
