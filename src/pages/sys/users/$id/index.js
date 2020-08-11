@@ -13,19 +13,19 @@ import { connect } from 'dva';
 )
 class Index extends PureComponent {
 
- 
+
   render() {
-    console.log("detail",this.props.match);
-    const {params}=this.props.match;
-    
-    console.log("params:",params);
-    console.log("id:",params.id);
+    console.log("detail", this.props.match);
+    const { params } = this.props.match;
+
+    console.log("params:", params);
+    console.log("id:", params.id);
 
     return (
       <div className={styles.right_main_content}>
-      
-    <p>用户详情:{params.id}</p>
-        
+
+        <p>用户详情:{params.id}</p>
+
       </div>
     );
   }

@@ -54,6 +54,7 @@ componentDidMount(){
             <Header className={styles.contentHeader}>
               <MyHeader></MyHeader>
             </Header>
+           
             
             <Content className={styles.mainContent}>
               <p>主要内容，显示内容是children，而children是来自layout/index.js中,它是根据不同路径转到不同的布局上</p>

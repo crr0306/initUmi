@@ -7,7 +7,8 @@ import styles from './index.css';
 import CreateUser from './components/CreateUser';
 /**
  * 1、connect和dispatch要配合使用，否则无法获取props
- * 2、初始化请求的数据：model中的subscriptions
+ * 2、初始化(直接)请求的数据：model中的subscriptions
+ * 3、传入多个参数：https://blog.csdn.net/qq_33323469/article/details/88951347
  */
 
 function Users({ dispatch, list: dataSource, loading, total, page: current }) {
@@ -16,7 +17,11 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: (text, record) => <Link to={`/sys/users/detail/${record.id}`}>{text}</Link>,
+      // render: (text, record) => <Link to={`/sys/users/${record.id}`}>{text}</Link>,
+      render:(text,record)=><Link to={{pathname:'/sys/users/detail',query:{
+        id: record.id,
+        text:text
+      }}}>{text}</Link>
     }, {
       title: 'Email',
       dataIndex: 'email',

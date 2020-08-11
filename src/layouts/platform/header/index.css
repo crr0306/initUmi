@@ -1,4 +1,6 @@
 .header{
     background-color:pink;
     display: flex;
+    height: 100%;
+   
 }

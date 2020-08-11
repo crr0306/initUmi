@@ -16,11 +16,14 @@
   background-color: mediumblue;
   margin-left: 205px;
 }
-/* .contentHeader{
-  background-color: red;
+.contentHeader{
+  background-color: aquamarine;
+  margin-bottom: 0px;
+  padding: 0px;
+  height: 54px;
  
   
-} */
+}
 .mainContent{
   display: flex;
   flex-direction: column;
