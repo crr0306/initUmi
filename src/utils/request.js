@@ -102,6 +102,14 @@ request.interceptors.request.use(async (url, options) => {
     }
 
 })
+
+const logout = () => {
+    // @HACK
+    /* eslint-disable no-underscore-dangle */
+    window.g_app._store.dispatch({
+        type: 'global/logout',
+    });
+};
 const checkIsLogin = (url) => {
     console.log("checkIsLogin");
     const isLogin = sessionStorage.getItem('isLogin');
