@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import styles from './index.css';
 import { connect } from 'dva';
 import UserCenter from "../../../components/UserCenter";
-
+import Search from "../../../components/Search";
 class RightHeader extends PureComponent {
 
   render() {
@@ -11,7 +11,7 @@ class RightHeader extends PureComponent {
     console.log("props in header", this.props);
     return (
       <div  className={styles.right_header}>
-        <UserCenter className={styles.action} userInfo={userInfo} />
+        <Search  />
         <UserCenter className={styles.action} userInfo={userInfo} />
 
       </div>
