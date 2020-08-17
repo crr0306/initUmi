@@ -4,14 +4,18 @@ import styles from './index.css';
 import { connect } from 'dva';
 import UserCenter from "../../../components/UserCenter";
 import Search from "../../../components/Search";
+import TestSearch from "../../../components/TestSearch";
+import TestSelect from "../../../components/Select";
 class RightHeader extends PureComponent {
 
   render() {
-    const { userInfo, message, notification } = this.props;
+    const { userInfo, message, notification} = this.props;
     console.log("props in header", this.props);
     return (
       <div  className={styles.right_header}>
         <Search  />
+        <TestSearch/>
+        <TestSelect/>
         <UserCenter className={styles.action} userInfo={userInfo} />
 
       </div>

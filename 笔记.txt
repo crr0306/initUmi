@@ -53,4 +53,26 @@ classnames组件通过透出一个对象来动态配置类名,不同的名字可
       'btn-pressed': this.state.isPressed,
       'btn-over': !this.state.isPressed && this.state.isHovered
     });
+12、赋值
+   this.setState({
+            searchData: dataSource,
+        });
     
+13、AutoComplete
+const options = dataSource.map(opt => (
+  <Option key={opt.title} value={opt.title}>
+    {opt.title}
+    <span className="certain-search-item-count">{opt.count} 人 关注</span>
+  </Option>
+));
+ dataSource={options}
+
+ onSearch：输入内容的时候会调用
+ onSelect:选择内容
+ onchange:输入框实时内容
+ 问题1：点击能跳转
+ 问题2：回车跳转
+ 问题3：匹配上后自动选择
+ 问题4：自动匹配：filterOption
+
+ 执行顺序：onclick --onchange--onselect or  onSearch

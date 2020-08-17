@@ -20,12 +20,12 @@ class HeaderSearch extends PureComponent {
         this.state = {
             initStatus: 0,
             searchData: [],
-            searchMode: true,
+            searchMode: false,
             value: '',
-            // dataSource:["aa","ab","bc"],
-            // arr:[]  
+
         };
     }
+    //动态更新searchData
     static getDerivedStateFromProps(nextProps, prevState) {
         const { flattenMenuData } = nextProps;
         const { initStatus } = prevState;
@@ -38,13 +38,9 @@ class HeaderSearch extends PureComponent {
         return prevState;
     }
 
-    filterOption(input, option) {
-        console.log("filterOption");
-        return (
-            option.componentOptions.children[0].text.toUpperCase().indexOf(input.toUpperCase()) >= 0
-        );
-    }
 
+
+    //根据输入参数来匹配，更新动态数据源
     handleSearch(value) {
         console.log("输入", value);
         const { flattenMenuData } = this.props;
@@ -52,17 +48,18 @@ class HeaderSearch extends PureComponent {
         this.setState({
             searchData: dataSource,
         });
+        console.log("重新render");
 
     }
-    //点击选择或者回车选择
+    //点击或者回车下拉条
     onSelect(value) {
-        console.log("选择：");
+        console.log("选择：", value);
 
         const { dispatch } = this.props;
-        console.log("state:",this.state);
+        console.log("state:", this.state);
         const { searchData } = this.state;
-      
-        const res = searchEqual(value, this.state.searchData);
+   
+        const res = searchEqual(value, searchData);
         const { link, key, query, ...rest } = res;
         if (link) {
             dispatch(routerRedux.push({
@@ -74,14 +71,14 @@ class HeaderSearch extends PureComponent {
                 },
             }));
         }
+        console.log("选择之后会重新渲染,value:",this.state.value);
 
     }
-    onChange = value => {
-        console.log("onchange:", value);
-    };
+
 
     //点击输入框触发
     enterSearchMode = () => {
+        console.log("点击输入框");
         this.setState({ searchMode: true }, () => {
             const { searchMode } = this.state;
             console.log("searchMode:", searchMode);
@@ -90,23 +87,41 @@ class HeaderSearch extends PureComponent {
             }
         });
     };
-    onKeyDown = e => {
-        console.log("onkeydown:", onkeydown);
-        if (e.key === 'Enter') {
-            this.debouncePressEnter();
-        }
+    leaveSearchMode = () => {
+        console.log("鼠标离开输入框");
+        this.setState({
+            searchMode: false,
+            value: '',
+        });
     };
-    debouncePressEnter() {
+    onChange = value => {
+        console.log("onchange");
+        this.setState({
+            searchMode: false,
+            value: value,
+        });
+        console.log("onchange，value:",this.state.value);
+       
+    };
+    // onKeyDown = e => {
+    //     console.log("onkeydown:", onkeydown);
+    //     if (e.key === 'Enter') {
+    //         this.debouncePressEnter();
+    //     }
+    // };
+    // debouncePressEnter() {
 
-        const { value } = this.state;
-        console.log('enter：', value)
-    }
+    //     const { value } = this.state;
+    //     console.log('enter：', value)
+    // }
     render() {
         console.log("props  in search:", this.props);
-        const { searchData, value } = this.state;
-        console.log("searchData:", searchData);
+        const { searchData, value,searchMode } = this.state;
+        console.log("显示的value:", value);
 
-
+        const inputClass = classNames(styles.input, {
+            [styles.show]: searchMode,
+        });
         return (
             <span onClick={this.enterSearchMode}>
                 <Icon type="search" key="Icon" />
@@ -123,37 +138,37 @@ class HeaderSearch extends PureComponent {
                                 value={key}
                                 text={title}
                             >
-                                <Link style={{ display: "block" }} 
-                                      to={{
-                                            pathname: link, 
-                                            query: { key: link.indexOf("frame") > -1 ? key : undefined }, 
-                                            state: { key, ...restState } 
-                                            }}>
+                                <Link style={{ display: "block" }}
+                                    to={{
+                                        pathname: link,
+                                        query: { key: link.indexOf("frame") > -1 ? key : undefined },
+                                        state: { key, ...restState }
+                                    }}>
                                     <span>{title}</span>
                                 </Link>
 
                             </Option>
                         );
                     })}
-                  
-                    onSelect={value=>{this.onSelect(value)}}
+                    value={value}
+                    onSelect={value => { this.onSelect(value) }}
                     // onChange={this.onChange}
                     onSearch={value => {
                         this.handleSearch(value);
                     }}
-                    placeholder="input here"
+                    onChange={this.onChange}
+                    className={inputClass}
+
                     optionLabelProp="text"
-                // filterOption={
-                //     (inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                //   }
 
                 >
                     <Input
-
+                        placeholder="input here"
                         ref={node => {
                             this.input = node;
                         }}
-                        onKeyDown={this.onKeyDown}
+                        onBlur={this.leaveSearchMode}
+
 
                     />
                 </AutoComplete>
