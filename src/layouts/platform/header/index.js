@@ -13,9 +13,9 @@ class RightHeader extends PureComponent {
     console.log("props in header", this.props);
     return (
       <div  className={styles.right_header}>
-        <Search  />
-        <TestSearch/>
-        <TestSelect/>
+        <Search  className={`${styles.action} ${styles.search}`} />
+        {/* <TestSearch/> */}
+         <TestSelect  className={`${styles.action} ${styles.search}`} />
         <UserCenter className={styles.action} userInfo={userInfo} />
 
       </div>

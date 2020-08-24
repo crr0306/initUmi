@@ -108,14 +108,14 @@ class TestSearch extends PureComponent {
                     placeholder="try to type `b`"
                   
                   
-                    // onChange={this.onChange}
-                    // //输入框显示内容
-                    // // value={value}
-                    // onSelect={value=>{
-                    //     this.onSelect(value);
-                    // }}
-                    // onSearch={value=>{ this.handleSearch(value); }                    
-                    // }
+                    onChange={this.onChange}
+                    //输入框显示内容
+                    value={value}
+                    onSelect={value=>{
+                        this.onSelect(value);
+                    }}
+                    onSearch={value=>{ this.handleSearch(value); }                    
+                    }
                     
                    
                    

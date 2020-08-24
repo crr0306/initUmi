@@ -76,3 +76,13 @@ const options = dataSource.map(opt => (
  问题4：自动匹配：filterOption
 
  执行顺序：onclick --onchange--onselect or  onSearch
+
+ 14、select 中optionFilterProp="children"
+
+ 15、effects 有三个参数：https://blog.csdn.net/ohmyauthentic/article/details/53543441
+ 16、跨越问题：  credentials: 'same-origin'
+
+ 17、locale :
+ https://github.com/umijs/umi/issues/1675
+ https://www.npmjs.com/package/umi-plugin-locale?activeTab=readme
+

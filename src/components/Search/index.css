@@ -1,8 +1,34 @@
-.menu{
+.headerSearch {
+          cursor: pointer;
+          font-size: 16px;
+      
+}
+.input {
+          transition: width 0.3s, margin-left 0.3s;
+          /*很重要*/
+          width: 0;
+          background: pink;
+          border-radius: 5px;
+          border: none;
+          
+}  
+.input    input {
+    border: 0px;
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+    box-shadow: none !important;
+            
+}
+.input :hover,
+.input :focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #0a06f0;
+}
+ .show {
+    width: 140px;
     margin-left: 8px;
 }
-.dropDown{
-    margin-left: 15px;
-    margin-right: 2px;
-
-}
+      
+  

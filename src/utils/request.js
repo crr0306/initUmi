@@ -46,7 +46,7 @@ const request = extend({
     prefix: '',
     errorHandler,
     // 默认错误处理
-    credentials: 'include', // 默认请求是否带上cookie
+    credentials: 'same-origin', // 默认请求是否带上cookie
 
 });
 
@@ -54,33 +54,6 @@ const request = extend({
 request.interceptors.request.use(async (url, options) => {
     console.log("request.interceptors");
     checkIsLogin(url);
-    // let c_token = localStorage.getItem("x-auth-token");
-    // console.log("c_token",c_token);
-    // if (c_token) {
-    //     const headers = {
-    //         'Content-Type': 'application/json',
-    //         'Accept': 'application/json',
-    //         'x-auth-token': c_token
-    //     };
-    //     return (
-    //         {
-    //             url: url,
-    //             options: { ...options, headers: headers },
-    //         }
-    //     );
-    // } else {
-    //     const headers = {
-    //         'Content-Type': 'application/json',
-    //         'Accept': 'application/json',
-    //         'x-auth-token': c_token
-    //     };
-    //     return (
-    //         {
-    //             url: url,
-    //             options: { ...options },
-    //         }
-    //     );
-    // }   
     const { method, headers, body } = options;
     if (method === 'POST' || method === 'PUT' || method === 'DELETE') {
         //表单请求

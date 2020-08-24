@@ -11,7 +11,10 @@ export default {
       dynamicImport: false,
       title: 'initUmi',
       dll: false,
-      
+      locale: {
+        enable: true,
+        default: 'zh-CN',//'en-US',
+      },
       routes: {
         exclude: [
           /models\//,

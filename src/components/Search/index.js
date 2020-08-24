@@ -5,9 +5,10 @@ import { connect } from 'dva';
 import { Input, Icon, AutoComplete } from 'antd';
 import { Link } from 'umi';
 import classNames from 'classnames';
-import styles from './index.css';
+
 import { routerRedux } from 'dva/router';
 import { searchEqual } from './_';
+import styles from './index.css';
 
 /*
    userInfo :从global中的state获取，而第一次请求是从第一次加载layout
@@ -51,9 +52,9 @@ class HeaderSearch extends PureComponent {
         console.log("重新render");
 
     }
-    //点击或者回车下拉条
+    //点击或者回车下拉条触发
     onSelect(value) {
-        console.log("选择：", value);
+        console.log("onSelect,value:", value);
 
         const { dispatch } = this.props;
         console.log("state:", this.state);
@@ -71,19 +72,19 @@ class HeaderSearch extends PureComponent {
                 },
             }));
         }
-        console.log("选择之后会重新渲染,value:",this.state.value);
+        console.log("选择之后会重新渲染,this.state.value:",this.state.value);
 
     }
 
 
-    //点击输入框触发
+    //点击输入框会触发
     enterSearchMode = () => {
-        console.log("点击输入框");
+        console.log("点击输入框触发：展开和获取焦点");
         this.setState({ searchMode: true }, () => {
             const { searchMode } = this.state;
             console.log("searchMode:", searchMode);
             if (searchMode) {
-                this.input.focus();
+                this.input.focus();//获取焦点
             }
         });
     };
@@ -100,30 +101,21 @@ class HeaderSearch extends PureComponent {
             searchMode: false,
             value: value,
         });
-        console.log("onchange，value:",this.state.value);
+        console.log("onchange，this.state.value:",this.state.value);
        
     };
-    // onKeyDown = e => {
-    //     console.log("onkeydown:", onkeydown);
-    //     if (e.key === 'Enter') {
-    //         this.debouncePressEnter();
-    //     }
-    // };
-    // debouncePressEnter() {
 
-    //     const { value } = this.state;
-    //     console.log('enter：', value)
-    // }
     render() {
         console.log("props  in search:", this.props);
+        const {className} =this.props;
         const { searchData, value,searchMode } = this.state;
-        console.log("显示的value:", value);
+        console.log("className:", className);
 
         const inputClass = classNames(styles.input, {
             [styles.show]: searchMode,
         });
         return (
-            <span onClick={this.enterSearchMode}>
+            <span onClick={this.enterSearchMode} className={(className, styles.headerSearch)}>
                 <Icon type="search" key="Icon" />
                 <AutoComplete
                     id="auto-complete"
@@ -151,19 +143,19 @@ class HeaderSearch extends PureComponent {
                         );
                     })}
                     value={value}
+                    className={inputClass}
                     onSelect={value => { this.onSelect(value) }}
-                    // onChange={this.onChange}
+                   
                     onSearch={value => {
                         this.handleSearch(value);
                     }}
                     onChange={this.onChange}
-                    className={inputClass}
-
+                
                     optionLabelProp="text"
 
                 >
                     <Input
-                        placeholder="input here"
+                        placeholder="站内搜索"
                         ref={node => {
                             this.input = node;
                         }}
