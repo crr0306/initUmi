@@ -53,7 +53,7 @@ export default [
     {
         title: "iframe",
         key: "iframe",
-        icon: "icon-chuangkouwindow30",
+        icon: "shop",
         children: [
             {
                 title: "bing",
