@@ -37,7 +37,7 @@ class LeftMenu extends PureComponent {
               text={name}
             >
               <a href={href} target={target}>
-                <Icon type={icon}></Icon>
+                <Icon type={icon}/>
                 <span>{name}</span>
               </a>
             </Item>
@@ -50,7 +50,7 @@ class LeftMenu extends PureComponent {
                   ...restState, key, pathtitles: pathtitles.concat(name)
                 }
               }}>
-                <Icon type={icon}></Icon>
+                <Icon type={icon}/>
                 <span>{name}</span>
               </Link>
             </Item>
